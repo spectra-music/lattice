@@ -1,4 +1,6 @@
-CMAKE_MININUM_REQUIRED( version 2.8 )
+cmake_minimum_required( VERSION 2.8 )
+project( lattice )
+
 
 # Version
 set( lattice_VERSION_MAJOR 0 )
@@ -16,10 +18,17 @@ set( CMAKE_C_FLAGS_DEBUG "-O2 -Wall -Wextra -pedantic -g" )
 set( CMAKE_C_FLAGS_RELEASE "-O2 -Wall -fomit-frame-pointer -DNDEBUG" )
 set( CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELEASE} -g" )
 
+
+# Add more CMake Module scripts
+set( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules )
+
+# Find LMDB
+find_package( LMDB )
+
 # The distclean target
-IF (UNIX)
-  ADD_CUSTOM_TARGET (distclean @echo cleaning for source distribution)
-  SET(distcleaned
+if (UNIX)
+  add_custom_target (distclean @echo cleaning for source distribution)
+  set(distcleaned
    cmake.depends
    cmake.check_depends
    CMakeCache.txt
@@ -31,11 +40,11 @@ IF (UNIX)
    *~
   )
   
-  ADD_CUSTOM_COMMAND(
+  add_custom_command(
     DEPENDS clean
     COMMENT "distribution clean"
     COMMAND rm
     ARGS    -Rf CMakeFiles CMakeTmp ${DISTCLEANED}
     TARGET  distclean
   )
-ENDIF(UNIX)
+endif(UNIX)
