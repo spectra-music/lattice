@@ -1,4 +1,4 @@
-cmake_minimum_required( VERSION 2.8 )
+cmake_minimum_required( VERSION 2.8.8 )
 project( lattice )
 
 
@@ -13,38 +13,52 @@ if (NOT CMAKE_BUILD_TYPE)
 endif()
 
 # Some compiler flags
-set( CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -std=c11" )
-set( CMAKE_C_FLAGS_DEBUG "-O2 -Wall -Wextra -pedantic -g" )
+set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11" )
+set( CMAKE_C_FLAGS_DEBUG "-Wall -Wextra -pedantic -g" )
 set( CMAKE_C_FLAGS_RELEASE "-O2 -Wall -fomit-frame-pointer -DNDEBUG" )
 set( CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELEASE} -g" )
-
 
 # Add more CMake Module scripts
 set( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules )
 
-# Find LMDB
+
+#######################
+# LMDB
+#######################
 find_package( LMDB )
 
-# The distclean target
-if (UNIX)
-  add_custom_target (distclean @echo cleaning for source distribution)
-  set(distcleaned
-   cmake.depends
-   cmake.check_depends
-   CMakeCache.txt
-   cmake.check_cache
-   *.cmake
-   Makefile
-   core core.*
-   gmon.out
-   *~
-  )
+if( NOT LMDB_FOUND )
+	message(FATAL_ERROR "LMDB can't be found. Set CMAKE_PREFIX_PATH variable to LMDB's installation prefix.")
+endif( NOT LMDB_FOUND )
+
+include_directories( ${LMDB_INCLUDE_DIRS} )
+link_directories( ${LMDB_LIBRARY_DIRS} )
+
+
+################################
+# Unit Tests
+################################
+# This has to be before any add_subdirectory,
+# so we can pick up the add_test inside of them.
+
+if(TEST)
+  set( CSPEC_FIND_REQUIRED "YES" )
+
+  # Find our testing library
+  find_package( CSpec )
   
-  add_custom_command(
-    DEPENDS clean
-    COMMENT "distribution clean"
-    COMMAND rm
-    ARGS    -Rf CMakeFiles CMakeTmp ${DISTCLEANED}
-    TARGET  distclean
-  )
-endif(UNIX)
+  enable_testing()
+  
+  # This adds another subdirectory, which has 'project(gtest)'.
+  add_subdirectory( test )
+  
+  # Include the gtest library. gtest_SOURCE_DIR is available due to
+  # 'project(gtest)' above.
+  include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+endif(TEST)
+
+################################
+# Normal Libraries & Executables
+################################
+
+add_subdirectory(lib)
