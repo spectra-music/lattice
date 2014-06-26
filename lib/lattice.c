@@ -1,3 +1,6 @@
+
+#define _GNU_SOURCE
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <lmdb.h>
@@ -11,16 +14,17 @@
  * for the combined string.
  * From http://stackoverflow.com/questions/2328182/prepending-to-a-string
  */
-inline static void prepend_string(char* s, const char* t) {
+inline void prepend_string(char* s, const char* t) {
     size_t len = strlen(t);
     memmove(s + len, s, strlen(s) + 1);
     for (size_t i = 0; i < len; ++i) {
         s[i] = t[i];
     }
 }
+void prepend_string(char* s, const char *t);
 
 
-static char *get_full_path_nonexistant(const char *relative_path) {
+char *get_full_path_nonexistant(const char *relative_path) {
   /* Make a copy of relative_path so we can mess around */
   char relpath[strlen(relative_path)];
   strcpy(relpath, relative_path);
@@ -67,27 +71,27 @@ static char *get_full_path_nonexistant(const char *relative_path) {
  * Run the main program
  * (just creates a graph for now)
  */
-int main(int argc, char* argv[]) {
-  if (argc == 1) {
-    printf("Usage: lattice_demo env/my_db.ltc");
-  }
+/* int main(int argc, char* argv[]) { */
+/*   if (argc == 1) { */
+/*     printf("Usage: lattice_demo env/my_db.ltc"); */
+/*   } */
 
-  char *full_path = get_or_create_full_path(argv[1]);
-  MDB_env *env;  /* This is the database environment (directory, etc.) */
+/*   char *full_path = get_or_create_full_path(argv[1]); */
+/*   MDB_env *env;  /\* This is the database environment (directory, etc.) *\/ */
 
-  /* Try to initialize the environment */
-  int rv = mdb_env_create(&env);
-  if ( rv != 0 ) {
-    printf("Error creating database environment. Error code: %d\n Exiting now.\n", rv);
-    exit(EXIT_FAILURE);
-  }
+/*   /\* Try to initialize the environment *\/ */
+/*   int rv = mdb_env_create(&env); */
+/*   if ( rv != 0 ) { */
+/*     printf("Error creating database environment. Error code: %d\n Exiting now.\n", rv); */
+/*     exit(EXIT_FAILURE); */
+/*   } */
 
 
   
-  MDB_dbi dbi;
+/*   MDB_dbi dbi; */
 
-  /* lattice_t *lattice = lattice_create(); */
+/*   /\* lattice_t *lattice = lattice_create(); *\/ */
 
-  free(full_path);
-  return 0;
-}
+/*   free(full_path); */
+/*   return 0; */
+/* } */

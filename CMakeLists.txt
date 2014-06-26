@@ -36,6 +36,13 @@ link_directories( ${LMDB_LIBRARY_DIRS} )
 
 
 ################################
+# Normal Libraries & Executables
+################################
+
+add_subdirectory(lib)
+
+
+################################
 # Unit Tests
 ################################
 # This has to be before any add_subdirectory,
@@ -48,17 +55,7 @@ if(TEST)
   find_package( CSpec )
   
   enable_testing()
-  
-  # This adds another subdirectory, which has 'project(gtest)'.
+
   add_subdirectory( test )
-  
-  # Include the gtest library. gtest_SOURCE_DIR is available due to
-  # 'project(gtest)' above.
-  include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 endif(TEST)
 
-################################
-# Normal Libraries & Executables
-################################
-
-add_subdirectory(lib)
