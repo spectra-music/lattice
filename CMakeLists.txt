@@ -42,15 +42,10 @@ link_directories( ${LMDB_LIBRARY_DIRS} )
 # so we can pick up the add_test inside of them.
 
 if(TEST)
-  set( CSPEC_FIND_REQUIRED "YES" )
-
-  # Find our testing library
-  find_package( CSpec )
-  
   enable_testing()
   
   # This adds another subdirectory, which has 'project(gtest)'.
-  add_subdirectory( test )
+  add_subdirectory( spec )
   
   # Include the gtest library. gtest_SOURCE_DIR is available due to
   # 'project(gtest)' above.
