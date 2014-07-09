@@ -49,13 +49,8 @@ add_subdirectory(lib)
 # so we can pick up the add_test inside of them.
 
 if(TEST)
-  set( CSPEC_FIND_REQUIRED "YES" )
-
-  # Find our testing library
-  find_package( CSpec )
-  
   enable_testing()
 
-  add_subdirectory( test )
+  add_subdirectory( spec )
 endif(TEST)
 
