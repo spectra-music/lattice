@@ -22,12 +22,12 @@ int main(int argc, char* argv[]) {
   /* Try to initialize the environment */
   int rv = mdb_env_create(&env);
   if ( rv != 0 ) {
-    printf("Error creating database environment. Error code: %d\n Exiting now.\n", rv);
+    printf("Error creating database environment. Error code: %d\n Exiting now.\n", rv);Xb
     exit(EXIT_FAILURE);
   }
   
   MDB_dbi dbi;
 
-  /* lattice_t *lattice = lattice_create(); */
+  /* lattice *lat = lattice_create(); */
   return 0;
 }
