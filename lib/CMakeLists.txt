@@ -3,5 +3,7 @@
 include_directories(${lattice_SOURCE_DIR}/include)
 add_library( lattice
   util.c
-  lattice.c
 )
+
+add_executable( lattice_demo lattice.c )
+target_link_libraries( lattice_demo lattice LMDB )

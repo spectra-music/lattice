@@ -39,7 +39,9 @@ extern ltc_edge_t *ltc_edge_create_directed_and_weighted(const char *name,
                                                          const ltc_vertex_t *from, 
                                                          const ltc_vertex_t *to);
 
+
 extern void ltc_edge_reverse(ltc_edge_t *edge);
+extern int ltc_edge_save(ltc_env_t *env, ltc_edge_t *edge);
 #endif /* LTC_EDGE_H */
 
 

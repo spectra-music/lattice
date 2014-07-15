@@ -14,7 +14,6 @@ static void prepend_string(char* s, const char* t) {
     for (size_t i = 0; i < len; ++i) {
         s[i] = t[i];
     }
-
 }
 
 
@@ -70,5 +69,4 @@ void get_full_path_nonexistant(char *dest, const char *relative_path) {
   
   /* If we still haven't gotten the full_path, assume the 
      file doesn't exist. Because we tried everything. */
-  return;
 }
