@@ -1,4 +1,4 @@
-#include "edge.h"
+#include "ltc_edge.h"
 
 ltc_edge_t *ltc_edge_create(const char *name, 
                             const ltc_vertex_t *vertex1, 

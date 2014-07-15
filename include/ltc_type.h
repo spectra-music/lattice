@@ -23,7 +23,6 @@ typedef struct ltc_vertex_type_t {
 extern ltc_vertex_type_t *ltc_create_vertex_type(const char *name);
 extern ltc_vertex_type_t *ltc_create_vertex_type_with_parents(const char *name, const char **parents);
 extern ltc_vertex_type_t *ltc_vertex_type_get(const char *name);
-extern ltc_
 #ifdef __cplusplus
 }
 #endif

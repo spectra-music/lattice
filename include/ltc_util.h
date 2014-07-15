@@ -1,5 +1,5 @@
-#ifndef LATTICE_UTIL_H
-#define LATTICE_UTIL_H
+#ifndef LTC_UTIL_H
+#define LTC_UTIL_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -11,4 +11,4 @@ extern void get_full_path_nonexistant(char *dest, const char *relative_path);
 }
 #endif
 
-#endif /* LATTICE_UTIL_H */
+#endif /* LTC_UTIL_H */

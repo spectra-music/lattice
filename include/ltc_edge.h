@@ -2,7 +2,7 @@
 #define LTC_EDGE_H
 #include <stdbool.h>
 #include <stdint.h>
-#include "vertex.h"
+#include "ltc_vertex.h"
 
 #ifndef LTC_MAX_EDGE_NAME_LEN
 #define LTC_MAX_EDGE_NAME_LEN 300
@@ -42,6 +42,7 @@ extern ltc_edge_t *ltc_edge_create_directed_and_weighted(const char *name,
 
 extern void ltc_edge_reverse(ltc_edge_t *edge);
 extern int ltc_edge_save(ltc_env_t *env, ltc_edge_t *edge);
+extern int ltc_edge_delete(ltc_env_t *env, ltc_edge_t *edge);
 #endif /* LTC_EDGE_H */
 
 
