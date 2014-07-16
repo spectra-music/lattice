@@ -17,7 +17,7 @@ typedef struct ltc_env ltc_env_t;
 struct ltc_env {
   MDB_env *mdb_env;
   MDB_dbi dbi;
-} ltc_env_t;
+};
 
 
 extern int ltc_env_open(ltc_env_t *env, const char *path, mdb_mode_t mode);

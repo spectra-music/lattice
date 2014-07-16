@@ -13,13 +13,10 @@ extern "C" {
 #endif
 
 
-/**
- * @brief The in-memory
- */
 typedef struct ltc_vertex ltc_vertex_t;
 struct ltc_vertex {
   char **type; // e.g. ["Color", "RGBColor"]
-} ltc_vertex_t;
+};
 
 
 #ifdef __cplusplus
